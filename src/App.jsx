@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import HomeView from './components/HomeView';
-import DashboardView from './components/DashboardView';
+import HomeView from './components/homeview';
+import DashboardView from './components/dashboardview';
 
 // LOGO IMPORT — change this one line to use your own image.
 import logo from './logo.svg';

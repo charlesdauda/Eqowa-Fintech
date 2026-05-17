@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import CircuitField from './CircuitField';
-import Logo from './Logo';
-import TimelineStep from './TimelineStep';
-import { HardwareIcon, SealIcon, LogoutIcon } from './Icons';
+import CircuitField from './circuitfield';
+import Logo from './logo';
+import TimelineStep from './timelinestep';
+import { HardwareIcon, SealIcon, LogoutIcon } from './icons';
 
 const SectionLabel = ({ children }) => (
   <div className="brand-sans text-[10px] tracking-[0.3em] text-[#8a8775]">{children}</div>
