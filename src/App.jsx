@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import HomeView from './components/homeview';
+import HomeView from './components/HomeView';
 import DashboardView from './components/DashboardView';
 import CommandCenterView from './components/CommandCenterView';
 
