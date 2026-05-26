@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import HomeView from './components/HomeView';
+import HomeView from './components/Homevgiew';
 import DashboardView from './components/DashboardView';
 import CommandCenterView from './components/CommandCenterView';
-import InquiryView from './components/InquiryView';
+import InquiryView from './components/Inquiryview';
 
 import logo from './logo.svg';
 
