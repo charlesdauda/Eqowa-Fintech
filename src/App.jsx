@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import HomeView from './components/HomeView';
 import DashboardView from './components/DashboardView';
 import CommandCenterView from './components/CommandCenterView';
+import InquiryView from './components/InquiryView';
 
 import logo from './logo.svg';
 
@@ -41,8 +42,6 @@ const GLOBAL_CSS = `
             mask-composite: exclude;
     pointer-events: none;
   }
-
-  /* Cyan-tinted panel variant for the Command Center */
   .panel-cyan { border-color: rgba(77, 212, 212, 0.12); }
   .panel-cyan::before {
     background: linear-gradient(180deg, rgba(77,212,212,0.20), transparent 60%);
@@ -54,7 +53,7 @@ const GLOBAL_CSS = `
 `;
 
 const App = () => {
-  const [view, setView] = useState('home');
+  const [view, setView] = useState('home'); // 'home' | 'inquiry' | 'dashboard' | 'command'
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -70,6 +69,9 @@ const App = () => {
     }, 500);
   };
 
+  // Background color flips between dark (home/dashboard/command) and light (inquiry).
+  const isLightSurface = view === 'inquiry';
+
   return (
     <>
       <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -77,17 +79,27 @@ const App = () => {
       <link rel="stylesheet" href={FONTS_HREF} precedence="default" />
       <style precedence="default">{GLOBAL_CSS}</style>
 
-      <div className="relative min-h-screen w-full overflow-hidden text-[#f5f1e8]
-                      bg-[radial-gradient(ellipse_at_top,#131210_0%,#0a0908_55%,#060504_100%)]">
-        <div className="grain pointer-events-none fixed inset-0 opacity-[0.035] mix-blend-overlay" />
+      <div
+        className={`relative min-h-screen w-full overflow-hidden ${
+          isLightSurface
+            ? 'text-[#111c24] bg-[#f7f8fa]'
+            : 'text-[#f5f1e8] bg-[radial-gradient(ellipse_at_top,#131210_0%,#0a0908_55%,#060504_100%)]'
+        }`}
+      >
+        {!isLightSurface && (
+          <div className="grain pointer-events-none fixed inset-0 opacity-[0.035] mix-blend-overlay" />
+        )}
 
         {view === 'home' && (
           <HomeView
             logo={logo}
             mounted={mounted}
             onLogin={() => switchView('dashboard')}
-            onInquire={() => switchView('command')}
+            onInquire={() => switchView('inquiry')}
           />
+        )}
+        {view === 'inquiry' && (
+          <InquiryView logo={logo} mounted={mounted} onBack={() => switchView('home')} />
         )}
         {view === 'dashboard' && (
           <DashboardView logo={logo} mounted={mounted} onLogout={() => switchView('home')} />
